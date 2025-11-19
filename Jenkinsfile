@@ -22,7 +22,7 @@ if [ -f requirements.txt ]; then pip install -r requirements.txt || true; fi
           } else {
             bat '''
 python -m venv %VENV_DIR%
-@call %VENV_DIR%\Scripts\activate
+@call %VENV_DIR%/Scripts/activate
 python -m pip install --upgrade pip
 if exist requirements.txt pip install -r requirements.txt
 '''
