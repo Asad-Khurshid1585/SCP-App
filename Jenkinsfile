@@ -13,6 +13,7 @@ pipeline {
       steps {
         script {
           if (isUnix()) {
+            sh 'sudo apt update && sudo apt install -y python3-venv'
             sh '''
 python3 -m venv ${VENV_DIR}
 . ${VENV_DIR}/bin/activate
