@@ -11,9 +11,9 @@ if [ -f requirements.txt ]; then
 fi
 # Prefer gunicorn if available
 if command -v gunicorn >/dev/null 2>&1; then
-  gunicorn -w 4 -b 0.0.0.0:8000 app:app &
+  $VENV_DIR/bin/gunicorn -w 4 -b 0.0.0.0:8000 app:app > gunicorn.log 2>&1 &
 else
-  python app.py &
+  $VENV_DIR/bin/python app.py > app.log 2>&1 &
 fi
 # Wait a bit for server to start
 sleep 5
