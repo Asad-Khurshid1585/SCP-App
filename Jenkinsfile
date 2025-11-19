@@ -14,12 +14,11 @@ pipeline {
         script {
           if (isUnix()) {
             sh '''
-if python3 -c "import venv" 2>/dev/null; then
-  python3 -m venv ${VENV_DIR}
-else
+python3 -m venv ${VENV_DIR} 2>/dev/null || {
+  echo "venv failed, installing virtualenv"
   python3 -m pip install --user virtualenv
   ~/.local/bin/virtualenv ${VENV_DIR}
-fi
+}
 . ${VENV_DIR}/bin/activate
 python -m pip install --upgrade pip
 if [ -f requirements.txt ]; then pip install -r requirements.txt || true; fi
