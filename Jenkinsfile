@@ -39,6 +39,17 @@ if exist requirements.txt pip install -r requirements.txt
         echo "No automated tests configured — skipping test stage"
       }
     }
+    stage('SonarQube Analysis') {
+      steps {
+        script {
+          if (isUnix()) {
+            sh 'sonar-scanner || echo "SonarQube scanner not installed; install it on the agent"'
+          } else {
+            bat 'sonar-scanner || echo SonarQube scanner not installed; install it on the agent'
+          }
+        }
+      }
+    }
     stage('Deploy') {
       steps {
         script {
