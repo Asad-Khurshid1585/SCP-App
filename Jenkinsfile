@@ -13,9 +13,9 @@ pipeline {
       steps {
         script {
           if (isUnix()) {
-            sh 'apt update && apt install -y python3-venv || echo "python3-venv install failed; ensure it is pre-installed on the agent"'
+            sh 'sudo apt update && sudo apt install -y python3-venv'
             sh '''
-python3 -m venv ${VENV_DIR} || { echo "venv creation failed; check python3-venv installation"; exit 1; }
+python3 -m venv ${VENV_DIR}
 . ${VENV_DIR}/bin/activate
 python -m pip install --upgrade pip
 if [ -f requirements.txt ]; then pip install -r requirements.txt || true; fi
