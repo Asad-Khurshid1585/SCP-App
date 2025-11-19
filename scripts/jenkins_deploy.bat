@@ -11,7 +11,9 @@ if exist requirements.txt (
 )
 where gunicorn >nul 2>nul
 if %ERRORLEVEL%==0 (
-  gunicorn -w 4 -b 0.0.0.0:8000 app:app
+  start /b gunicorn -w 4 -b 0.0.0.0:8000 app:app
 ) else (
-  python app.py
+  start /b python app.py
 )
+timeout /t 5 /nobreak >nul
+echo Server started in background

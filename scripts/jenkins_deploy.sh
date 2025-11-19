@@ -11,7 +11,10 @@ if [ -f requirements.txt ]; then
 fi
 # Prefer gunicorn if available
 if command -v gunicorn >/dev/null 2>&1; then
-  exec gunicorn -w 4 -b 0.0.0.0:8000 app:app
+  gunicorn -w 4 -b 0.0.0.0:8000 app:app &
 else
-  exec python app.py
+  python app.py &
 fi
+# Wait a bit for server to start
+sleep 5
+echo "Server started in background"
