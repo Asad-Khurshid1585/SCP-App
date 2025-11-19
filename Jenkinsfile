@@ -16,7 +16,7 @@ pipeline {
             sh '''
 python3 -m venv ${VENV_DIR} 2>/dev/null || {
   echo "venv failed, installing virtualenv"
-  python3 -m pip install --user virtualenv
+  python3 -m pip install --user --break-system-packages virtualenv
   ~/.local/bin/virtualenv ${VENV_DIR}
 }
 . ${VENV_DIR}/bin/activate
