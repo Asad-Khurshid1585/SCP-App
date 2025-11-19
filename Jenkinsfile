@@ -13,9 +13,13 @@ pipeline {
       steps {
         script {
           if (isUnix()) {
-            sh 'sudo apt update && sudo apt install -y python3-venv'
             sh '''
-python3 -m venv ${VENV_DIR}
+if python3 -c "import venv" 2>/dev/null; then
+  python3 -m venv ${VENV_DIR}
+else
+  python3 -m pip install --user virtualenv
+  ~/.local/bin/virtualenv ${VENV_DIR}
+fi
 . ${VENV_DIR}/bin/activate
 python -m pip install --upgrade pip
 if [ -f requirements.txt ]; then pip install -r requirements.txt || true; fi
