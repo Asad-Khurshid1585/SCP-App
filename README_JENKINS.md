@@ -45,3 +45,5 @@ gunicorn -w 4 -b 0.0.0.0:8000 app:app    # if gunicorn installed
 Notes & next steps
 - If you want a production-ready deployment, run the app behind a reverse proxy (nginx), or use a container (Docker) and deploy with a container orchestration strategy.
 - If you want me to add a Dockerfile + Pipeline using Docker, tell me and I will add it.
+
+Updated from folder1.
